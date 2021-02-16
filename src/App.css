@@ -12,7 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.backgroundImage{
+  width:100vw;
+  height:100vh;
+  background-image:url(./fintechbanking.jpg)
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

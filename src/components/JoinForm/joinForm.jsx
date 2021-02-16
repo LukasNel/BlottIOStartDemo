@@ -4,8 +4,9 @@ import RegistrationScreen from './RegistrationScreen/registrationScreen';
 import SubmitScreen from './SubmitScreen/submitScreen';
 import './joinForm.css';
 
+
 import { UserOutlined ,SolutionOutlined  } from '@ant-design/icons';
-import { Form, Input, Button, Checkbox, InputNumber, Select,Upload, Steps} from 'antd';
+import { Form, Input, Button, Checkbox, InputNumber, Select,Upload, Steps, Card, Space} from 'antd';
 
 const { Step } = Steps;
 
@@ -15,50 +16,50 @@ class JoinForm extends Component {
         formValues:{
             firstname:{
                 value:"",
-                handleChange:(event)=>{
+                handleChange:(value)=>{
             //        console.log(`firstname ${value}`);
-            console.log(event);
+            console.log(value)
                     let formValues = {...this.state.formValues};
-                    formValues.firstname.value=event.target.value;
+                    formValues.firstname.value=value;
                     this.setState({formValues:formValues});
                     console.log(`firstname ${this.state.formValues.firstname.value}`);
                 }
             },
             lastname:{
                 value:"",
-                handleChange:(event)=>{
+                handleChange:(value)=>{
                     //console.log(`lastname ${value}`);
                     let formValues = {...this.state.formValues};
-                   formValues.lastname.value=event.target.value;
+                   formValues.lastname.value=value;
                     this.setState({formValues:formValues});
                 }
             },
             age:{
                 value:"",
-                handleChange:(event)=>{
+                handleChange:(value)=>{
                    // console.log(`age ${value}`);
                     let formValues = {...this.state.formValues};
-                    formValues.age.value=event.target.value;
+                    formValues.age.value=value;
                     this.setState({formValues:formValues});
                 }
             },
             skills:{
-                value:0,
+                value:[],
                 items:["CSS","HTML","Java"],
-                handleChange:(event)=>{
+                handleChange:(value)=>{
                    // console.log(`skills ${value}`);
                     let formValues = {...this.state.formValues};
-                    formValues.skills.value=event.target.value;
+                    formValues.skills.value=value;
                     this.setState({formValues:formValues});
                 }
             },
             techstack:{
-                value:0,
+                value:[],
                 items:["Web","Embedded","Backend","Frontend","Full-stack"],
-                handleChange:(event)=>{
+                handleChange:(value)=>{
                   //  console.log(`techstack ${value}`);
                     let formValues = {...this.state.formValues};
-                    formValues.techstack.value=event.target.value;
+                    formValues.techstack.value=value;
                     this.setState({formValues:formValues});
                 }
             }
@@ -80,21 +81,24 @@ class JoinForm extends Component {
         let componentTemp;
         if(this.state.currentIndex == 0) {           
                 console.log("Join",this.state.currentIndex);
-                componentTemp = <JoinScreen incrementIndex={this.incrementIndex}  />
+                componentTemp =  <Space align="center">
+              <JoinScreen incrementIndex={this.incrementIndex}></JoinScreen></Space>  
         }else if(this.state.currentIndex == 1) {
          //   console.log("Registration",this.state.currentIndex);
-            componentTemp = (<div><p> <Steps>
+            componentTemp = (<div>    
+            <RegistrationScreen formValues={this.state.formValues} incrementIndex={this.incrementIndex} />
+            <p> <Steps>
                 <Step onClick={()=>{ this.setState({currentIndex:1})}} onstatus="process" title="Registration" icon={<UserOutlined />} />
                 <Step status="wait" title="Details" icon={<SolutionOutlined />} />
-            </Steps></p>    
-            <RegistrationScreen formValues={this.state.formValues} incrementIndex={this.incrementIndex} />
+            </Steps></p>
             </div>)
         }else if(this.state.currentIndex == 2) {
             console.log("Submit",this.state.currentIndex);
-            componentTemp = (<div><p> <Steps>
+            componentTemp = (<div> <SubmitScreen currency={"R"} />
+            <p> <Steps>
                 <Step onClick={()=>{ this.setState({currentIndex:1})}} onstatus="finish" title="Registration" icon={<UserOutlined />} />
                 <Step onClick={()=>{ this.setState({currentIndex:2})}} status="progress" title="Details" icon={<SolutionOutlined />} />
-            </Steps></p> <SubmitScreen currency={"R"} />
+            </Steps></p>
             </div>)
         }else if(this.state.currentIndex == 0) {
           }
@@ -102,10 +106,13 @@ class JoinForm extends Component {
      }
     render() { 
         return ( 
-            <div className="form-container">
-                <input type="number" value={this.state.currentIndex} onChange={(event)=>this.changeIndex(event)} />
-                {this.handleFormSwitch()}
-            </div>
+           
+                
+                    <Card className="form-container" title="Registration Screen"  headStyle = {{fontSize:"25px",fontWeight:"bold"}} bordered>
+                    {this.handleFormSwitch()}
+                    </Card>
+                
+           
          );
     }
 }

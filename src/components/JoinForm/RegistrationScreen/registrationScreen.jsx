@@ -30,17 +30,50 @@ const RegistrationScreen = (props) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-  const onCheck = async () => {
-    try {
-      const values = await form.validateFields();
-      console.log('Success:', values);
-      props.incrementIndex();
-    } catch (errorInfo) {
-      console.log('Failed:', errorInfo);
-    }
+  const onCheck = () => {
+    
+      form.validateFields().then((values)=>{
+        console.log('Success:', values);
+        props.incrementIndex();
+      }).catch(errorInfo => {
+    /*
+    errorInfo:
+      {
+        values: {
+          username: 'username',
+          password: 'password',
+        },
+        errorFields: [
+          { name: ['password'], errors: ['Please input your Password!'] },
+        ],
+        outOfDate: false,
+      }
+    */
+  });
+     
+  
   };
   const onValuesChange  = (val)=>{
       console.log(val);
+      for(let key in val){
+          switch(key){
+              case "firstname":
+                props.formValues.firstname.handleChange(val[key]);    
+              break;
+              case "lastname":
+                props.formValues.lastname.handleChange(val[key]);    
+              break;
+              case "age":
+                props.formValues.age.handleChange(val[key]);    
+              break;
+              case "skills":
+                props.formValues.skills.handleChange(val[key]);    
+              break;
+              case "techstack":
+                props.formValues.techstack.handleChange(val[key]);    
+              break;
+          }
+      }
   }
   //console.log( props.formValues.techstack.items);
 
@@ -54,6 +87,7 @@ const RegistrationScreen = (props) => {
     <Form
       {...layout}
       name="basic"
+      form={form}
       initialValues={{
         remember: true,
         firstname: props.formValues.firstname.value,
@@ -65,6 +99,7 @@ const RegistrationScreen = (props) => {
       onValuesChange ={onValuesChange}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      onSubmitCapture={onCheck}
     >
         
       <Form.Item
@@ -77,7 +112,7 @@ const RegistrationScreen = (props) => {
           },
         ]}
       >
-        <Input  onChange={props.formValues.firstname.handleChange} />
+        <Input   />
       </Form.Item>
         
       <Form.Item
@@ -90,7 +125,7 @@ const RegistrationScreen = (props) => {
           },
         ]}
       >
-        <Input  onChange={props.formValues.lastname.handleChange} />
+        <Input   />
       </Form.Item>
       <Form.Item
         name='age'
@@ -98,28 +133,30 @@ const RegistrationScreen = (props) => {
         rules={[
           {
             type: 'number',
+            required:true,
+            message:"Please input your age",
             min: 0,
             max: 130,
           },
         ]}
       >
-        <InputNumber  onChange={props.formValues.age.handleChange} />
+        <InputNumber   />
       </Form.Item>
       <Form.Item
         name="skills"
         label="Skills"
         rules={[{ required: true, message: 'Please fill in your skills.', type: 'array' }]}
       >
-        <Select mode="tags" style={{ width: '100%' }} placeholder="Please fill in your skills."  onChange={props.formValues.skills.handleChange}>
+        <Select mode="tags" style={{ width: '100%' }} placeholder="Please fill in your skills."  >
             {skills}
         </Select>
       </Form.Item>
       <Form.Item
         name="techstack"
         label="Tech Stack"
-        rules={[{ required: true, message: 'Please fill in your skills.', type: 'array' }]}
+        rules={[{ required: true, message: 'Please fill in your tech stack.', type: 'array' }]}
       >
-        <Select mode="tags" style={{ width: '100%' }} placeholder="Please fill in your skills."  onChange={props.formValues.techstack.handleChange}>
+        <Select mode="tags" style={{ width: '100%' }} placeholder="Please fill in your tech stack."  >
          {techstack}
         </Select>
       </Form.Item>
@@ -128,7 +165,7 @@ const RegistrationScreen = (props) => {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button type="primary" onClick={onCheck} htmlType="submit">
+        <Button type="primary" htmlType="submit">
           Next
         </Button>
       </Form.Item>
