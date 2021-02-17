@@ -8,7 +8,7 @@ const { Option } = Select;
 const { Step } = Steps;
 const layout = {
   labelCol: {
-    span: 8,
+    span: 6,
   },
   wrapperCol: {
     span: 16,
@@ -16,8 +16,8 @@ const layout = {
 };
 const tailLayout = {
   wrapperCol: {
-    offset: 8,
-    span: 16,
+    offset: 0,
+    span: 32,
   },
 };
 
@@ -75,6 +75,7 @@ const RegistrationScreen = (props) => {
           }
       }
   }
+  
   //console.log( props.formValues.techstack.items);
 
   let techstack = props.formValues.techstack.items.map((item)=>{return <Option key={item}>{item}</Option>});
@@ -160,12 +161,10 @@ const RegistrationScreen = (props) => {
          {techstack}
         </Select>
       </Form.Item>
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+    
+     
+      <Form.Item {...tailLayout} block>
+      <Button type="primary" htmlType="submit" block style={{width:"100%", marginTop:"10px"}}>
           Next
         </Button>
       </Form.Item>

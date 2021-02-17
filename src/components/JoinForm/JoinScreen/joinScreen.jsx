@@ -8,7 +8,7 @@ class JoinScreen extends Component {
         return (  <div className="space-align-container">
         <div className="space-align-block">
           <Space align="center">
-            <Button type="primary" onClick={this.props.incrementIndex}>Join With Us</Button>
+            <Button type="primary" block onClick={this.props.incrementIndex}>Join With Us</Button>
           </Space>
         </div>
       </div>  );

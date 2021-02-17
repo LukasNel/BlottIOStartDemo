@@ -46,6 +46,7 @@ const SubmitScreen = (props) => {
         }
       },
   };
+  this.props.changeTitle("Submit your Details");
   return (
     <Form
       {...layout}
@@ -90,7 +91,7 @@ const SubmitScreen = (props) => {
         </Upload>
       </Form.Item>
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" block>
           Submit
         </Button>
       </Form.Item>

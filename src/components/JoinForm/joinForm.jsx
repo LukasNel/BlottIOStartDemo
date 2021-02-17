@@ -13,6 +13,7 @@ const { Step } = Steps;
 class JoinForm extends Component {
     state = { 
         currentIndex : 0,
+        title:"",
         formValues:{
             firstname:{
                 value:"",
@@ -77,28 +78,28 @@ class JoinForm extends Component {
         if(val < 0)val = 2;
         this.setState({currentIndex:val});
      }
-     handleFormSwitch(){
+     changeTitle = (val)=>{
+         this.setState({title:val});
+     }
+     handleFormSwitch=()=>{
         let componentTemp;
         if(this.state.currentIndex == 0) {           
                 console.log("Join",this.state.currentIndex);
+            
                 componentTemp =  <Space align="center">
               <JoinScreen incrementIndex={this.incrementIndex}></JoinScreen></Space>  
         }else if(this.state.currentIndex == 1) {
          //   console.log("Registration",this.state.currentIndex);
+    
             componentTemp = (<div>    
-            <RegistrationScreen formValues={this.state.formValues} incrementIndex={this.incrementIndex} />
-            <p> <Steps>
-                <Step onClick={()=>{ this.setState({currentIndex:1})}} onstatus="process" title="Registration" icon={<UserOutlined />} />
-                <Step status="wait" title="Details" icon={<SolutionOutlined />} />
-            </Steps></p>
+            <RegistrationScreen formValues={this.state.formValues} changeTitle={this.changeTitle} incrementIndex={this.incrementIndex} />
+            
             </div>)
         }else if(this.state.currentIndex == 2) {
+        //    this.state.title= "Submit your Details";
             console.log("Submit",this.state.currentIndex);
-            componentTemp = (<div> <SubmitScreen currency={"R"} />
-            <p> <Steps>
-                <Step onClick={()=>{ this.setState({currentIndex:1})}} onstatus="finish" title="Registration" icon={<UserOutlined />} />
-                <Step onClick={()=>{ this.setState({currentIndex:2})}} status="progress" title="Details" icon={<SolutionOutlined />} />
-            </Steps></p>
+            componentTemp = (<div> <SubmitScreen  changeTitle={this.changeTitle} currency={"R"} />
+           
             </div>)
         }else if(this.state.currentIndex == 0) {
           }
@@ -108,7 +109,7 @@ class JoinForm extends Component {
         return ( 
            
                 
-                    <Card className="form-container" title="Registration Screen"  headStyle = {{fontSize:"25px",fontWeight:"bold"}} bordered>
+                    <Card className="form-container" title={this.state.title}  headStyle = {{fontSize:"25px",fontWeight:"bold", borderBottom:"1px solid black"}} bordered>
                     {this.handleFormSwitch()}
                     </Card>
                 
