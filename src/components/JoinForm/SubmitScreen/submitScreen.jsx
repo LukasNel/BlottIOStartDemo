@@ -53,7 +53,7 @@ const SubmitScreen = (props) => {
                 onSuccess("ok");
             });
         },
-        onFinish:{onFinish}
+
     };
     return (
         <Form
@@ -64,6 +64,7 @@ const SubmitScreen = (props) => {
             }}
             layout="horizontal"
             onValuesChange={onValuesChange}
+            onFinish={onFinish}
         >
 
             <Layout>
