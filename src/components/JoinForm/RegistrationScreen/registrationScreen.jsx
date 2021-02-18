@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Form, Input, Button, Checkbox, InputNumber, Select, Upload, Steps, Layout, PageHeader,Divider} from 'antd';
+import { Form, Input, Button, Checkbox, InputNumber, Select, Upload, Steps, Layout, PageHeader,Divider, message} from 'antd';
 import { UserOutlined, SolutionOutlined } from '@ant-design/icons';
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -25,38 +25,19 @@ const tailLayout = {
 
 const RegistrationScreen = (props) => {
     const [form] = Form.useForm();
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
     const onCheck = () => {
 
         form.validateFields().then((values) => {
             console.log('Success:', values);
             props.incrementIndex();
         }).catch(errorInfo => {
-            /*
-            errorInfo:
-              {
-                values: {
-                  username: 'username',
-                  password: 'password',
-                },
-                errorFields: [
-                  { name: ['password'], errors: ['Please input your Password!'] },
-                ],
-                outOfDate: false,
-              }
-            */
+            message.error('Error in Form Validation');
+            console.log('Error in Form Validation', errorInfo)
         });
 
 
     };
     const onValuesChange = (val) => {
-        console.log(val);
         for (let key in val) {
             switch (key) {
                 case "firstname":
@@ -78,10 +59,9 @@ const RegistrationScreen = (props) => {
         }
     }
   
-    //console.log( props.formValues.techstack.items);
     let techstack = props.formValues.techstack.items.map((item) => { return <Option key={item}>{item}</Option> });
     let skills = props.formValues.skills.items.map((item) => { return <Option key={item}>{item}</Option> });
-    // console.log(techstack);
+    
     return (
         <div>
             <Form

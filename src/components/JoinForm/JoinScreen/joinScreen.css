@@ -1,9 +1,4 @@
-.space-align-container {
-    margin:auto;
-    position: relative;
-    text-align:center;
-  }
-  .joinbutton{
+.joinbutton{
     height:70px;
       width:100%;
       border-radius: 20px;

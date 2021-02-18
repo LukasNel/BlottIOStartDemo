@@ -18,8 +18,7 @@ class JoinForm extends Component {
             firstname:{
                 value:"",
                 handleChange:(value)=>{
-            //        console.log(`firstname ${value}`);
-            console.log(value)
+            
                     let formValues = {...this.state.formValues};
                     formValues.firstname.value=value;
                     this.setState({formValues:formValues});
@@ -29,7 +28,7 @@ class JoinForm extends Component {
             lastname:{
                 value:"",
                 handleChange:(value)=>{
-                    //console.log(`lastname ${value}`);
+               
                     let formValues = {...this.state.formValues};
                    formValues.lastname.value=value;
                     this.setState({formValues:formValues});
@@ -38,7 +37,7 @@ class JoinForm extends Component {
             age:{
                 value:"",
                 handleChange:(value)=>{
-                   // console.log(`age ${value}`);
+                   
                     let formValues = {...this.state.formValues};
                     formValues.age.value=value;
                     this.setState({formValues:formValues});
@@ -48,7 +47,7 @@ class JoinForm extends Component {
                 value:[],
                 items:["CSS","HTML","Java"],
                 handleChange:(value)=>{
-                   // console.log(`skills ${value}`);
+                   
                     let formValues = {...this.state.formValues};
                     formValues.skills.value=value;
                     this.setState({formValues:formValues});
@@ -58,7 +57,6 @@ class JoinForm extends Component {
                 value:[],
                 items:["Web","Embedded","Backend","Frontend","Full-stack"],
                 handleChange:(value)=>{
-                  //  console.log(`techstack ${value}`);
                     let formValues = {...this.state.formValues};
                     formValues.techstack.value=value;
                     this.setState({formValues:formValues});
@@ -67,7 +65,7 @@ class JoinForm extends Component {
             hourly_rate:{
                 value:0,
                 handleChange:(value)=>{
-                   // console.log(`age ${value}`);
+                  
                     let formValues = {...this.state.formValues};
                     formValues.hourly_rate.value=value;
                     this.setState({formValues:formValues});
@@ -106,7 +104,6 @@ class JoinForm extends Component {
          this.setState({title:val});
      }
      submitForm = (values)=>{
-         console.log('submitForm',values);
          let formData = new FormData();
          formData.append('firstname', this.state.formValues.firstname.value);
          formData.append('lastname', this.state.formValues.lastname.value);
@@ -115,10 +112,6 @@ class JoinForm extends Component {
          formData.append('techstack', this.state.formValues.techstack.value);
          formData.append('hourly_rate', this.state.formValues.hourly_rate.value);
          formData.append('cv', this.state.formValues.cv.value);
-         for (var value of formData.values()) {
-            console.log(value);
-         }
-         
          axios({
             method: 'put',
             url: 'http://127.0.0.1:8000/api/prospect/',
@@ -126,10 +119,10 @@ class JoinForm extends Component {
             data: formData
         })
         .then(res => {
-           // console.log('Tes',res);
             message.success(`Submitted successfully`);
         }).catch(function (response) {
             //handle error
+            message.error('Error with Submission');
             console.log(response);
         });
      }
@@ -137,11 +130,8 @@ class JoinForm extends Component {
             if(this.state.currentIndex == 0) {           
                 return "";
             }else if(this.state.currentIndex == 1) {
-            //   console.log("Registration",this.state.currentIndex);
                 return "Registration Screen";
             }else if(this.state.currentIndex == 2) {
-            //    this.state.title= "Submit your Details";
-                console.log("Submit",this.state.currentIndex);
                 return "Submit your Details";
                 
             }else if(this.state.currentIndex == 0) {
@@ -150,39 +140,41 @@ class JoinForm extends Component {
      handleFormSwitch=()=>{
         let componentTemp;
         if(this.state.currentIndex == 0) {           
-                console.log("Join",this.state.currentIndex);
-            
-                componentTemp =  <JoinScreen incrementIndex={this.incrementIndex}></JoinScreen>;
+            componentTemp =  <JoinScreen 
+                                incrementIndex={this.incrementIndex} />;
         }else if(this.state.currentIndex == 1) {
-         //   console.log("Registration",this.state.currentIndex);
-    
-            componentTemp = (<div>    
-            <RegistrationScreen formValues={this.state.formValues} changeTitle={this.changeTitle} decrementIndex = {this.decrementIndex} incrementIndex={this.incrementIndex} />
-            
-            </div>)
+            componentTemp = (
+                <div>    
+                    <RegistrationScreen 
+                        formValues={this.state.formValues} 
+                        changeTitle={this.changeTitle} 
+                        decrementIndex = {this.decrementIndex} 
+                        incrementIndex={this.incrementIndex} />
+                </div>)
         }else if(this.state.currentIndex == 2) {
-        //    this.state.title= "Submit your Details";
-            console.log("Submit",this.state.currentIndex);
-            componentTemp = (<div> <SubmitScreen  formValues={this.state.formValues} decrementIndex = {this.decrementIndex} submitForm={this.submitForm} changeTitle={this.changeTitle} currency={"R"} />
-           
-            </div>)
+            componentTemp = (
+                <div> 
+                    <SubmitScreen  
+                        formValues={this.state.formValues} 
+                        decrementIndex = {this.decrementIndex} 
+                        submitForm={this.submitForm} 
+                        changeTitle={this.changeTitle} 
+                        currency={"R"} />
+            
+                </div>)
         }else if(this.state.currentIndex == 0) {
-          }
-          return componentTemp;
+        }
+        return componentTemp;
      }
     render() { 
-        
         return ( 
             <Row justify="center" align="middle" style={{height:"100vh"}}>
-            <Col span={6} xs={24} sm={6} ><Layout className="form-container">
-             {this.handleFormSwitch()}
-             
-          </Layout></Col>
-          </Row>
-                /*    <Card className="form-container" title={this.getTitle()}  headStyle = {{fontSize:"25px",fontWeight:"bold", borderBottom:"1px solid black"}} bordered>
-                    {this.handleFormSwitch()}
-                    </Card>*/
-                
+                <Col span={6} xs={24} sm={6} >
+                    <Layout className="form-container">
+                        {this.handleFormSwitch()}
+                    </Layout>
+                </Col>
+          </Row>              
            
          );
     }

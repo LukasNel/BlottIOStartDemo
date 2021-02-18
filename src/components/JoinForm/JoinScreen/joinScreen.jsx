@@ -9,16 +9,17 @@ class JoinScreen extends Component {
         return (
             <Row justify="center" align="middle" style={{ height: "200px", width: "100%" }}>
                 <Col justify="center" className="joinbuttoncontainer" span={12} >
-                        <Button justify="center" shape="round" size="large"  className="joinbutton purple-6" type="primary" onClick={this.props.incrementIndex} ghost>
+                        <Button justify="center" 
+                                shape="round" 
+                                size="large"  
+                                className="joinbutton" 
+                                type="primary" 
+                                onClick={this.props.incrementIndex} ghost>
                             Join With Us
                         </Button>
                   
                 </Col>
-
             </Row>
-
-
-
         );
     }
 }
