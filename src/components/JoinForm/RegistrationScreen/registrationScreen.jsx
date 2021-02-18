@@ -78,8 +78,6 @@ const RegistrationScreen = (props) => {
                 }}
                 layout="horizontal"
                 onValuesChange={onValuesChange}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 onSubmitCapture={onCheck}
             >
                 <Layout>
