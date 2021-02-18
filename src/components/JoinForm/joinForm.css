@@ -1,12 +1,33 @@
 .form-container{
-    position:fixed;
-    top:50%;
-    left:50%;
+    xposition:fixed;
+    xtop:50%;
+    xleft:50%;
     padding:20px;
     border-radius: 3px;
-    transform: translateX(-50%) translateY(-50%);
-    display: block;
-    width:25vw;
-    hxeight:590px;
-    background-color: rgba(255,255,255,0.95);
+    transforxm: translateX(-50%) translateY(-50%);
+    dispxlay: block;
+    widtxh:25vw;
+    heigxht:590px;
+    background: rgba(255,255,255,0.95);
+}
+.pageheader{
+    background-color: rgba(255,255,255,0);
+    borxder-bottom: rgba(0,0,0,0.5) solid 1px;
+    paddixng-bottom: 76px;
+margxin-bottom: 24px;;
+}
+.pageheaderTitle{
+    
+}
+.header {
+ heigxht:10%;
+ hexight:50px;
+ padxding:0px;
+ marxgin-top: 0px;
+}
+.footer {
+height:85px;
+}
+.content {
+hexight:260px;
 }
