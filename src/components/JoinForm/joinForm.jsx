@@ -114,7 +114,7 @@ class JoinForm extends Component {
          formData.append('cv', this.state.formValues.cv.value);
          axios({
             method: 'put',
-            url: 'http://0.0.0.0:8000/api/prospect/',
+            url: 'localhost:8000/api/prospect/',
             headers: {'Content-Type': 'multipart/form-data' },
             data: formData
         })
