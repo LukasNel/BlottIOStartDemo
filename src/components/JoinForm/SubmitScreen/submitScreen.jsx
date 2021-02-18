@@ -53,7 +53,7 @@ const SubmitScreen = (props) => {
                 onSuccess("ok");
             });
         },
-        onFinish={onFinish}
+        onFinish:{onFinish}
     };
     return (
         <Form
