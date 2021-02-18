@@ -39,7 +39,7 @@
   },
  "proxy": {
     "/api":  {
-        "target": "http://backend:8000/"
+        "target": "http://18.233.155.93:8000/"
     }
   }
 }
