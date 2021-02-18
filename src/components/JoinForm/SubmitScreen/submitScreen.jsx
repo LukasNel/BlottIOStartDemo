@@ -48,23 +48,29 @@ const SubmitScreen = (props) => {
     const uploadProps = {
         name: 'file',
         multiple:false,
+        maxCount:1,
         action: 'http://127.0.0.1:8000/api/prospect/fileupload/',
         customRequest:({file, onSuccess})=>{
-            console.log('uplaod');
+            console.log('upload');
             let formData = new FormData();
             formData.append('filename',file.name);
             formData.append('file',file);
-            axios({
-                method: 'put',
+            props.formValues.cv.handleChange(file);
+            setTimeout(()=>{
+                onSuccess("ok");
+            });
+            /*axios({
+                method: 'post',
                 url: 'http://127.0.0.1:8000/api/prospect/fileupload/',
                 data: formData
             })
             .then(res => {
                 console.log('Tes',res);
+                onSuccess("ok");
             }).catch(function (response) {
                 //handle error
                 console.log(response);
-            });
+            });*/
         },
         headers: {
         },

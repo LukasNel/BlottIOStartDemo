@@ -14,15 +14,15 @@ from .models import Prospect
 
 
 class FileUploadView(APIView):
-    parser_classes = [FileUploadParser]
+    parser_classes = [MultiPartParser]
 
     def put(self, request,   format=None):
         #file_obj = request.data['file']
         print('fileupload')
-        #pprint(file_obj)
+        # pprint(file_obj)
         
-        #pprint.pprint( request._request.FILES)
-        pprint.pprint(  request.data['file'])
+        pprint.pprint(request._request.FILES)
+        pprint.pprint(request.data['file'])
         # ...
         # do some stuff with uploaded file
         # ...
@@ -30,7 +30,6 @@ class FileUploadView(APIView):
 
 class ProspectList(APIView):
     parser_classes = [MultiPartParser]
-   
     def get(self, request, format=None):
         prospects = Prospect.objects.all()
         serializer = ProspectSerializer(prospects, many=True)

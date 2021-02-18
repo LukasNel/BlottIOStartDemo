@@ -21,7 +21,7 @@ class TechstackSerializer(serializers.ModelSerializer):
 
 
 class ProspectSerializer(serializers.ModelSerializer):  
-    cv = serializers.FileField(required=False)
+    #cv = serializers.FileField(required=False)
     #skills = serializers.ListField(child=serializers.CharField())
     skills = serializers.ListField(write_only=True,child=serializers.CharField())
     #skills = SkillSerializer(source="skills", many=True)
@@ -55,12 +55,8 @@ class ProspectSerializer(serializers.ModelSerializer):
             )
             obj.save()
             p.techstack.add(obj)
-        print('done')
-        return p
 
-'''
-    firstname = serializers.CharField(max_length=200)
-    lastname = serializers.CharField(max_length=200)
-    age = serializers.IntegerField()
-    hourly_rate = serializers.DecimalField(decimal_places=2,max_digits=20)
-'''
+        p.cv = validated_data['cv']
+        print('done')
+        p.save()
+        return p

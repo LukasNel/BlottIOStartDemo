@@ -114,7 +114,7 @@ class JoinForm extends Component {
          formData.append('skills', this.state.formValues.skills.value);
          formData.append('techstack', this.state.formValues.techstack.value);
          formData.append('hourly_rate', this.state.formValues.hourly_rate.value);
-         //formData.append('cv', this.state.formValues.cv.value);
+         formData.append('cv', this.state.formValues.cv.value);
          for (var value of formData.values()) {
             console.log(value);
          }
