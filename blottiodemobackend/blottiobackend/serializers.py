@@ -21,10 +21,7 @@ class TechstackSerializer(serializers.ModelSerializer):
 
 
 class ProspectSerializer(serializers.ModelSerializer):  
-    #cv = serializers.FileField(required=False)
-    #skills = serializers.ListField(child=serializers.CharField())
     skills = serializers.ListField(write_only=True,child=serializers.CharField())
-    #skills = SkillSerializer(source="skills", many=True)
     techstack = serializers.ListField(write_only=True,child=serializers.CharField())
     
     class Meta:

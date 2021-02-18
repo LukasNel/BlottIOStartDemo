@@ -13,21 +13,6 @@ from .serializers import ProspectSerializer
 from .models import Prospect
 
 
-class FileUploadView(APIView):
-    parser_classes = [MultiPartParser]
-
-    def put(self, request,   format=None):
-        #file_obj = request.data['file']
-        print('fileupload')
-        # pprint(file_obj)
-        
-        pprint.pprint(request._request.FILES)
-        pprint.pprint(request.data['file'])
-        # ...
-        # do some stuff with uploaded file
-        # ...
-        return Response(status=204)
-
 class ProspectList(APIView):
     parser_classes = [MultiPartParser]
     def get(self, request, format=None):
@@ -54,8 +39,6 @@ class ProspectList(APIView):
         print(request.data['firstname'])
         serializer = ProspectSerializer(data=request.data)
         if serializer.is_valid():
-        #serializer.is_valid()
-            print('sss')
             prospect = serializer.save()
             
             pprint.pprint(prospect)
@@ -63,4 +46,4 @@ class ProspectList(APIView):
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, world.")
