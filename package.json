@@ -37,9 +37,5 @@
       "last 1 safari version"
     ]
   },
- "proxy": {
-    "/api":  {
-        "target": "http://18.233.155.93:8000/"
-    }
-  }
+ "proxy":  "http://backend:8000/"
 }
