@@ -34,6 +34,10 @@ const SubmitScreen = (props) => {
             }
         }
     }
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        props.submitForm(values);
+    };
     const uploadProps = {
         name: 'file',
         multiple:false,
@@ -48,7 +52,8 @@ const SubmitScreen = (props) => {
             setTimeout(()=>{
                 onSuccess("ok");
             });
-        }
+        },
+        onFinish={onFinish}
     };
     return (
         <Form
